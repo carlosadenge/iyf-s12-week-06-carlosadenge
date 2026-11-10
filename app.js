@@ -3,7 +3,6 @@
 // Week 6: Asynchronous JavaScript
 // ============================================
 
-const API_KEY = "YOUR_API_KEY";   // ← Replace with your real key
 const form = document.getElementById("search-form");
 const cityInput = document.getElementById("city-input");
 const loading = document.getElementById("loading");
