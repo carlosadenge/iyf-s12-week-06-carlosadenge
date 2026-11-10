@@ -63,4 +63,62 @@ loadUser(1, function(user) {
     console.log("User loaded:", user);
 });
 
+console.log("\n===== TASK 11.2: Callback Hell & Promises =====");
+
+// ---------- CALLBACK HELL (BAD) ----------
+function getUserData(userId, callback) {
+    setTimeout(() => {
+        callback({ id: userId, name: "Carlos Adenge" });
+    }, 1000);
+}
+
+function getUserPosts(userId, callback) {
+    setTimeout(() => {
+        callback([
+            { id: 1, title: "My first post" },
+            { id: 2, title: "Learning JavaScript" }
+        ]);
+    }, 1000);
+}
+
+function getPostComments(postId, callback) {
+    setTimeout(() => {
+        callback([
+            { id: 1, text: "Great post!" },
+            { id: 2, text: "Thanks for sharing" }
+        ]);
+    }, 1000);
+}
+
+// This is the "Pyramid of Doom" - hard to read and maintain
+getUserData(1, function(user) {
+    console.log("User:", user);
+    getUserPosts(user.id, function(posts) {
+        console.log("Posts:", posts);
+        getPostComments(posts[0].id, function(comments) {
+            console.log("Comments:", comments);
+        });
+    });
+});
+
+// ---------- CREATING A PROMISE ----------
+const myPromise = new Promise((resolve, reject) => {
+    const success = true;
+
+    setTimeout(() => {
+        if (success) {
+            resolve("It worked!");
+        } else {
+            reject("Something went wrong");
+        }
+    }, 1000);
+});
+
+myPromise
+    .then(result => {
+        console.log("Success:", result);
+    })
+    .catch(error => {
+        console.log("Error:", error);
+    });
 
