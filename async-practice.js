@@ -173,3 +173,23 @@ getUserDataPromise(1)
     .catch(error => {
         console.error("Error:", error);
     });
+
+console.log("\n===== TASK 11.3: Promise Chaining =====");
+
+// Using the Promise versions from Task 11.2
+getUserDataPromise(1)
+    .then(user => {
+        console.log("User:", user);
+        return getUserPostsPromise(user.id);   // return the next promise
+    })
+    .then(posts => {
+        console.log("Posts:", posts);
+        return getPostCommentsPromise(posts[0].id);
+    })
+    .then(comments => {
+        console.log("Comments:", comments);
+    })
+    .catch(error => {
+        console.error("Error:", error);
+    });
+
