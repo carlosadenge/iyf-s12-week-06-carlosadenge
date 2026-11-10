@@ -207,3 +207,30 @@ Promise.all([promise1, promise2, promise3])
         console.error("One of them failed:", error);
     });
 
+const fast = new Promise(resolve => setTimeout(() => resolve("Fast!"), 100));
+const slow = new Promise(resolve => setTimeout(() => resolve("Slow!"), 500));
+
+Promise.race([fast, slow])
+    .then(result => {
+        console.log("Winner:", result);   // "Fast!"
+    });
+
+async function loadThreeUsers() {
+    try {
+        const users = await Promise.all([
+            getUserDataPromise(1),
+            getUserDataPromise(2),
+            getUserDataPromise(3)
+        ]);
+
+        console.log("Three users loaded in parallel:");
+        users.forEach(user => {
+            console.log(`- ${user.name} (ID: ${user.id})`);
+        });
+    } catch (error) {
+        console.error("Failed to load users:", error);
+    }
+}
+
+loadThreeUsers();
+
