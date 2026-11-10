@@ -1,74 +1,30 @@
 // ============================================
-// PART B — Promises + chaining
+// WEEK 6 - ASYNC PRACTICE
+// Student: Carlos Adenge
 // ============================================
 
-function getUser(userId) {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (!userId) return reject(new Error("Missing userId"));
-      resolve({ id: userId, name: nameFor(userId) });
-    }, 400);
-  });
-}
+console.log("===== TASK 11.1: Understanding Async =====");
 
-function getOrders(user) {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve([
-        { id: 101, amount: 20 },
-        { id: 102, amount: 35 },
-      ]);
-    }, 400);
-  });
-}
+// --- Synchronous (runs in order) ---
+console.log("1 - Start");
+console.log("2 - Middle");
+console.log("3 - End");
 
-function getOrderTotal(orders) {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const total = orders.reduce((sum, o) => sum + o.amount, 0);
-      resolve(total);
-    }, 400);
-  });
-}
+// --- Asynchronous (does not block) ---
+console.log("A - Start");
 
-// Chain — keep `user` alive by returning it together with the next value
-getUser(1)
-  .then((user) => {
-    return getOrders(user).then((orders) => ({ user, orders }));
-  })
-  .then(({ user, orders }) => {
-    return getOrderTotal(orders).then((total) => ({ user, total }));
-  })
-  .then(({ user, total }) => {
-    console.log(`B: ${user.name} spent ${total}`);
-  })
-  .catch((err) => console.error("B error:", err.message));
+setTimeout(() => {
+    console.log("B - This is delayed (2 seconds)");
+}, 2000);
 
+console.log("C - End");
 
-// ============================================
-// PART C — async/await
-// ============================================
+console.log("A");
 
-async function checkout(userId) {
-  try {
-    const user = await getUser(userId);
-    const orders = await getOrders(user);
-    const total = await getOrderTotal(orders);
-    console.log(`C: ${user.name} spent ${total}`);
-  } catch (err) {
-    console.error("C error:", err.message);
-  }
-}
+setTimeout(() => console.log("B"), 0);
 
-checkout(1);
+console.log("C");
 
+setTimeout(() => console.log("D"), 100);
 
-// ============================================
-// BONUS — parallel with Promise.all
-// ============================================
-
-Promise.all([getUser(1), getUser(2)])
-  .then(([u1, u2]) => {
-    console.log(`Bonus: ${u1.name} and ${u2.name}`);
-  })
-  .catch((err) => console.error("Bonus error:", err.message));
+console.log("E");
