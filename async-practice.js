@@ -122,3 +122,45 @@ myPromise
         console.log("Error:", error);
     });
 
+// ---------- PROMISE VERSION (GOOD) ----------
+function getUserDataPromise(userId) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (userId > 0) {
+                resolve({ id: userId, name: "Carlos Adenge" });
+            } else {
+                reject("Invalid user ID");
+            }
+        }, 1000);
+    });
+}
+
+function getUserPostsPromise(userId) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (userId > 0) {
+                resolve([
+                    { id: 1, title: "My first post" },
+                    { id: 2, title: "Learning JavaScript" }
+                ]);
+            } else {
+                reject("Could not get posts");
+            }
+        }, 1000);
+    });
+}
+
+function getPostCommentsPromise(postId) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (postId > 0) {
+                resolve([
+                    { id: 1, text: "Great post!" },
+                    { id: 2, text: "Thanks for sharing" }
+                ]);
+            } else {
+                reject("Could not get comments");
+            }
+        }, 1000);
+    });
+}
