@@ -193,3 +193,17 @@ getUserDataPromise(1)
         console.error("Error:", error);
     });
 
+// Fetch 3 users at the same time
+const promise1 = getUserDataPromise(1);
+const promise2 = getUserDataPromise(2);
+const promise3 = getUserDataPromise(3);
+
+Promise.all([promise1, promise2, promise3])
+    .then(results => {
+        console.log("All users loaded together:");
+        console.log(results);   // array of 3 users
+    })
+    .catch(error => {
+        console.error("One of them failed:", error);
+    });
+
