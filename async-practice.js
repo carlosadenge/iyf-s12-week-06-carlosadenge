@@ -164,3 +164,12 @@ function getPostCommentsPromise(postId) {
         }, 1000);
     });
 }
+
+// Simple test
+getUserDataPromise(1)
+    .then(user => {
+        console.log("Promise User:", user);
+    })
+    .catch(error => {
+        console.error("Error:", error);
+    });
