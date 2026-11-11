@@ -3,6 +3,7 @@
 // Week 6: Asynchronous JavaScript
 // ============================================
 
+const API_KEY = "0b2c3c798688e5ddb9916f159b17ee65";
 const form = document.getElementById("search-form");
 const cityInput = document.getElementById("city-input");
 const loading = document.getElementById("loading");
