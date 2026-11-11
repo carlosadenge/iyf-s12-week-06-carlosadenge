@@ -24,7 +24,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Write config.js from the repository secret
         env:
-          API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
+          OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
         run: echo "const API_KEY = \"$OPENWEATHER_API_KEY\";" > config.js
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
